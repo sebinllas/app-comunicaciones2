@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="/public/style.css" />
+
+    <title>App Comunicaciones 2</title>
+  </head>
+  <body>
+    <div id="hitAlert">
+      <h2>
+        ¡feliciationes!
+        <br />
+        Has acertado la palabra :)
+      </h2>
+    </div>
+    <div id="gameSelect">
+      <div id="newgame" class="container">
+        <h2>Crear nueva partida</h2>
+        <label for="userName">Nombre de usuario: </label>
+        <br />
+        <input type="text" name="userName" id="userNameHost" />
+        <br />
+        <label for="newPassword">Contraseña:</label>
+        <br />
+        <input type="password" name="newPassword" id="newPassword" />
+        <br />
+        <button type="button" onclick="newGame()">crear nuevo juego</button>
+      </div>
+
+      <div id="joingame" class="container">
+        <h2>Unirte a una partida</h2>
+        <label for="gameId">Id del juego:</label>
+        <br />
+        <input type="text" name="gameId" id="gameId" />
+        <br />
+        <label for="userName">Nombre de usuario: </label>
+        <br />
+        <input type="text" name="userName" id="userName" />
+        <br />
+        <label for="password">contraseña:</label>
+        <br />
+        <input type="password" name="password" id="password" />
+        <br />
+        <button type="button" onclick="joinGame()">Unirse</button>
+      </div>
+    </div>
+
+    <div id="game" style="display: none">
+      <h1>APP COMUNICACIONES "</h1>
+      <h3>pinturillo</h3>
+      <div id="displayGameId"></div>
+      <input
+        type="button"
+        value="Iniciar Juego"
+        ,
+        id="startGameBtn"
+        onclick="startGame()"
+      />
+      <div id="wordToDrawView">
+        <h3>palabra a dibujar:</h3>
+      </div>
+      <div id="timer"></div>
+      <div id="gamecontainer">
+        <div id="drawArea">
+          <canvas
+            id="canvas"
+            style="border: 2px solid rgb(4, 39, 38)"
+            \
+          ></canvas>
+
+          <br />
+          <input type="color" id="color" oninput="changeColor(this.value);" />
+          <input
+            type="range"
+            id="strokewidth"
+            oninput="changeStrokeWidth(this.value);"
+            min="1"
+            max="15"
+            value="2"
+          />
+          <input type="button" value="Limpiar" id="clear" />
+          <input
+            type="button"
+            value="&#x2B55;"
+            id="circle"
+            onclick="circle()"
+          />
+          <input
+            type="button"
+            value="&#x1F532;"
+            id="square"
+            onclick="square()"
+          />
+          <input type="button" value="🚫" id="eraser" onclick="erase()" />
+        </div>
+
+        <div id="chat">
+          <h3>Mensajes</h3>
+          <div id="messagesArea"></div>
+          <div>
+            <input type="text" name="message" id="message" />
+            <button onclick="sendMessage()">Enviar</button>
+          </div>
+        </div>
+        <div id="usersList">
+          <h3>Usuarios</h3>
+          <ol id="usersArea"></ol>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"
+    integrity="sha512-2RDFHqfLZW8IhPRvQYmK9bTLfj/hddxGXQAred2wNZGkrKQkLGj8RCkXfRJPHlDerdHHIzTFaahq4s/P4V6Qig=="
+    crossorigin="anonymous"
+  ></script>
+  <script defer src="/public/app.js"></script>
+</html>

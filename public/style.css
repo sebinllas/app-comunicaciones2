@@ -1,0 +1,132 @@
+body {
+  font: 1em sans-serif;
+}
+#game {
+  display: flex;
+}
+#messagesArea {
+  overflow-x: visible;
+  height: 200px;
+  min-width: 200px;
+  overflow-x: visible;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  overflow-y: scroll;
+  margin: 10px;
+  padding: 10px;
+
+  border-radius: 15px;
+}
+#chat {
+  margin-top: 10px;
+  max-width: 250px;
+  background: #282846;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: white;
+}
+#usersList{
+  margin-top: 10px;
+  width: 250px;
+  background: #282846;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+#usersList h3{
+  width: 300px;
+  padding: 10px;
+}
+#drawArea {
+  margin-top: 10px;
+  width: 570px;
+  height: 450px;
+  background-color: #282846;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 0px 0px 10px 10px;
+}
+#hitAlert{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 300px;
+  height: 150px;
+  position: fixed;
+  background-color:#007580;
+  color: #d8ebe4;
+  border-radius: 20px;
+  font-size: large;
+  z-index: 1;
+  margin-left: 50%;
+  margin-top: 10%;
+  left: -150px;
+}
+#drawArea input {
+  margin-right: 5px;
+  border-radius: 10px;
+}
+#gamecontainer {
+  display: flex;
+  justify-content: space-around;
+  background: #fed049;
+  flex-wrap: wrap;
+}
+canvas {
+  margin: 5px;
+  background: white;
+  border-radius: 15px;
+}
+#gameSelect {
+  display: flex;
+  flex-wrap: wrap;
+  background:#fed049;
+  justify-content: space-around;
+}
+
+.container {
+  padding: 10px;
+  width: 40%;
+  background: #d8ebe4;
+  border-radius: 10px;
+  margin: 10px;
+  display: block;
+  position: relative;
+}
+
+#gameSelect h2 {
+  background: #282846;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  color: #d8ebe4;
+  width: 80%;
+}
+#gameSelect input {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 80%;
+}
+#gameSelect label {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: auto;
+}
+#gameSelect button {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: auto;
+}
