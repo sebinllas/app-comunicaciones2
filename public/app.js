@@ -31,7 +31,7 @@ canvas.setAttribute("height", 400);
 var ctx = canvas.getContext("2d");
 
 //----------------------Sockets Handling----------------------
-const socket = io("https://app-comunicaciones2.herokuapp.com:3000");
+const socket = io();
 
 socket.on("firstConnection", (data) => {
   console.log(data);
