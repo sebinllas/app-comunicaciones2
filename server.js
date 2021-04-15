@@ -1,3 +1,4 @@
+const { makeid, randomWord } = require("./utils");
 var firstUserConnected = false;
 var clientRooms = {};
 var games = {};
@@ -26,8 +27,6 @@ app.listen(app.get("port"), () => {
 });
 
 //----------------------Sockets Handling----------------------
-
-const { makeid, randomWord } = require("./utils");
 const io = require("socket.io")(3000, {
   cors: {
     origin: "*",
