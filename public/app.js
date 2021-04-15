@@ -1,4 +1,3 @@
-const socket = io("http://localhost:3000");
 var gameId;
 var gameScreen = document.getElementById("game");
 var gameSelect = document.getElementById("gameSelect");
@@ -32,6 +31,7 @@ canvas.setAttribute("height", 400);
 var ctx = canvas.getContext("2d");
 
 //----------------------Sockets Handling----------------------
+const socket = io("http://localhost:3000");
 
 socket.on("firstConnection", (data) => {
   console.log(data);

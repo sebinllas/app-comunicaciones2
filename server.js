@@ -10,7 +10,7 @@ const path = require("path");
 app.use(express.static(path.join(__dirname + "/public/style.css")));
 app.use(express.static(path.join(__dirname + "/public/app.js")));
 
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 80);
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
 });
@@ -175,6 +175,11 @@ io.on("connection", (client) => {
   });
 
   function runGame(room, i) {
+    try{
+      var users = Array.from(io.sockets.adapter.rooms.get(room));
+    }catch(error){
+      return
+    }
     var users = Array.from(io.sockets.adapter.rooms.get(room));
     var UsersNumber = users.length;
     if (UsersNumber == 1 || games[room].winner) {
