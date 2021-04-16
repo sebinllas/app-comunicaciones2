@@ -31,8 +31,14 @@ app.listen(app.get("port"), () => {
 */
 //----------------------Sockets Handling----------------------
 
-const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
-
+//const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
+const io = require("socket.io")(process.env.PORT || 3000, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    withCredentials: false,
+  },
+});
 
 io.on("connection", (client) => {
   console.log("usuario: " + client.id + " se ha conectado");
@@ -46,12 +52,12 @@ io.on("connection", (client) => {
   });
 
   client.on("message", (message) => {
-    if(games[clientRooms[client.id]]){
+    if (games[clientRooms[client.id]]) {
       var word = games[clientRooms[client.id]]["word"];
-    }else{
+    } else {
       word = " ";
     }
-    
+
     if (
       message
         .normalize("NFD")
@@ -178,10 +184,10 @@ io.on("connection", (client) => {
   });
 
   function runGame(room, i) {
-    try{
+    try {
       var users = Array.from(io.sockets.adapter.rooms.get(room));
-    }catch(error){
-      return
+    } catch (error) {
+      return;
     }
     var users = Array.from(io.sockets.adapter.rooms.get(room));
     var UsersNumber = users.length;
