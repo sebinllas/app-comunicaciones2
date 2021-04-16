@@ -1,5 +1,10 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');body {
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+body {
+  display: flex;
+  height: 90%;
+  align-items: center;
+  justify-content: center;
   font-family: 'Cabin', sans-serif;
   background-color: #282846;
 }
