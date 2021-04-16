@@ -30,7 +30,7 @@ canvas.setAttribute("width", 550);
 canvas.setAttribute("height", 400);
 var ctx = canvas.getContext("2d");
 
-//----------------------Sockets Handling----------------------
+//----------------------Socket Handling----------------------
 
 const socket = io();
 
