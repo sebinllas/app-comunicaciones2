@@ -4,7 +4,7 @@ var clientRooms = {};
 var games = {};
 
 //----------------------web Server----------------------
-
+/*
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -28,17 +28,11 @@ app.get("/public/app.js", (req, res) => {
 app.listen(app.get("port"), () => {
   console.log("listenin on port: ", app.get("port"));
 });
-
+*/
 //----------------------Sockets Handling----------------------
 
-//const io = require('socket.io')(server);
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    withCredentials: false,
-  },
-});
+const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
+
 
 io.on("connection", (client) => {
   console.log("usuario: " + client.id + " se ha conectado");
