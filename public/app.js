@@ -32,7 +32,7 @@ var ctx = canvas.getContext("2d");
 
 //----------------------Sockets Handling----------------------
 
-const socket = io(":3000");
+const socket = io();
 
 socket.on("firstConnection", (data) => {
   console.log(data);
