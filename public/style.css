@@ -1,20 +1,66 @@
-body {
-  font: 1em sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');body {
+  font-family: 'Cabin', sans-serif;
+  background-color: #282846;
+}
+#headboard{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+#info{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+#info div{
+  width: 26%;
+  border: 5px solid #fed049;
+  background: white;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#headboard h1{
+  width: 98%;
+  margin-top: 0;
+  margin-bottom: 10px;
+  border: 10px solid #fed049;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+
+}
+#startGameBtn{
+  border-radius: 10px;
+  border: 0px;
+  color: white;
+  background-color: #282846;
+  width: 29%;
+  margin: 0;
+
 }
 #game {
   display: flex;
 }
 #messagesArea {
-  overflow-x: visible;
-  height: 200px;
+  overflow-x: hidden;
   min-width: 200px;
+  max-height: 200px;
+  min-height: 100px;
   overflow-x: visible;
   background-color: rgb(255, 255, 255);
   color: black;
   overflow-y: scroll;
   margin: 10px;
   padding: 10px;
-
   border-radius: 15px;
 }
 #chat {
@@ -27,19 +73,29 @@ body {
   flex-wrap: wrap;
   color: white;
 }
+#message{
+  border-radius: 10px;
+  min-height: 10px;
+  margin-bottom: 10px;
+  height: 25px;
+  overflow-x: scroll;
+}
+#sendMessageBtn{
+  border-radius: 10px;
+  border: 0px;
+  height: 25px;
+}
 #usersList{
   margin-top: 10px;
   width: 250px;
   background: #282846;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   color: white;
 }
-#usersList h3{
-  width: 300px;
-  padding: 10px;
-}
+
 #drawArea {
   margin-top: 10px;
   width: 570px;
@@ -48,7 +104,15 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 10px ;
+}
+#usersArea{
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width: 70%;
+  min-height: 100px;
+
 }
 #hitAlert{
   display: none;
@@ -59,8 +123,9 @@ body {
   width: 300px;
   height: 150px;
   position: fixed;
-  background-color:#007580;
-  color: #d8ebe4;
+  border: 10px solid #fed049;
+  background-color:#282846;
+  color: white;
   border-radius: 20px;
   font-size: large;
   z-index: 1;
@@ -71,15 +136,26 @@ body {
 #drawArea input {
   margin-right: 5px;
   border-radius: 10px;
+  text-align: center;
 }
 #gamecontainer {
   display: flex;
   justify-content: space-around;
   background: #fed049;
   flex-wrap: wrap;
+  padding: 10px;
+  border-radius: 10px;
+  width: 97%;
+}
+#gamecontainer input {
+  border-radius: 10px;
+  border: 0;
+  margin-bottom: 10px;
+  border: 2px dashed white;
 }
 canvas {
   margin: 5px;
+  margin-top: 8px;
   background: white;
   border-radius: 15px;
 }
@@ -88,12 +164,23 @@ canvas {
   flex-wrap: wrap;
   background:#fed049;
   justify-content: space-around;
+  border-radius: 10px;
+}
+#gameSelect h1{
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px;
+  text-align: center;
+
 }
 
 .container {
   padding: 10px;
   width: 40%;
-  background: #d8ebe4;
+  background: white;
   border-radius: 10px;
   margin: 10px;
   display: block;
@@ -106,7 +193,7 @@ canvas {
   padding: 10px;
   margin: 10px;
   text-align: center;
-  color: #d8ebe4;
+  color: white;
   width: 80%;
 }
 #gameSelect input {
@@ -115,6 +202,8 @@ canvas {
   margin: 10px;
   text-align: center;
   width: 80%;
+  background-color: aliceblue;
+  
 }
 #gameSelect label {
   border-radius: 10px;

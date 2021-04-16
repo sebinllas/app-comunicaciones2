@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="/public/style.css" />
 
-    <title>App Comunicaciones 2</title>
+  <title>PaintGame🎨🖌️🖼️</title>
   </head>
   <body>
     <div id="hitAlert">
@@ -16,53 +16,58 @@
       </h2>
     </div>
     <div id="gameSelect">
+      <h1>PaintGame🎨🖌️🖼️</h1>
       <div id="newgame" class="container">
         <h2>Crear nueva partida</h2>
-        <label for="userName">Nombre de usuario: </label>
-        <br />
-        <input type="text" name="userName" id="userNameHost" />
-        <br />
-        <label for="newPassword">Contraseña:</label>
-        <br />
-        <input type="password" name="newPassword" id="newPassword" />
-        <br />
-        <button type="button" onclick="newGame()">crear nuevo juego</button>
+        <form action="#" id="newGameForm">
+          <label for="userName">Nombre de usuario: </label>
+          <br />
+          <input type="text" name="userName" id="userNameHost" required />
+          <br />
+          <label for="newPassword">Contraseña:</label>
+          <br />
+          <input type="password" name="newPassword" id="newPassword" />
+          <br />
+          <button type="submit">crear nuevo juego</button>
+        </form>
       </div>
 
       <div id="joingame" class="container">
         <h2>Unirte a una partida</h2>
-        <label for="gameId">Id del juego:</label>
-        <br />
-        <input type="text" name="gameId" id="gameId" />
-        <br />
-        <label for="userName">Nombre de usuario: </label>
-        <br />
-        <input type="text" name="userName" id="userName" />
-        <br />
-        <label for="password">contraseña:</label>
-        <br />
-        <input type="password" name="password" id="password" />
-        <br />
-        <button type="button" onclick="joinGame()">Unirse</button>
+        <form action="#" id="joinGameForm">
+          <label for="gameId">Id del juego:</label>
+          <br />
+          <input type="text" name="gameId" id="gameId" />
+          <br />
+          <label for="userName">Nombre de usuario: </label>
+          <br />
+          <input type="text" name="userName" id="userName" required />
+          <br />
+          <label for="password">contraseña:</label>
+          <br />
+          <input type="password" name="password" id="password" />
+          <br />
+          <button type="submit">Unirse</button>
+        </form>
       </div>
     </div>
 
     <div id="game" style="display: none">
-      <h1>APP COMUNICACIONES "</h1>
-      <h3>pinturillo</h3>
-      <div id="displayGameId"></div>
-      <input
-        type="button"
-        value="Iniciar Juego"
-        ,
-        id="startGameBtn"
-        onclick="startGame()"
-      />
-      <div id="wordToDrawView">
-        <h3>palabra a dibujar:</h3>
-      </div>
-      <div id="timer"></div>
-      <div id="gamecontainer">
+      <div id="headboard">
+        <h1>PaintGame🎨🖌️🖼️</h1>
+        <div id="info">
+          <div id="displayGameId"></div>
+          <div id="wordToDrawView">PALABRA</div>
+          <div id="timer">TIEMPO</div>
+        </div>
+        
+        <div id="gamecontainer">
+          <div style="width: 97%; display: flex; justify-content: center;">
+            <button type="button" id="startGameBtn" onclick="startGame()">
+              <h3>Iniciar juego</h3>
+            </button>
+          </div>
+
         <div id="drawArea">
           <canvas
             id="canvas"
@@ -80,32 +85,43 @@
             max="15"
             value="2"
           />
-          <input type="button" value="Limpiar" id="clear" />
+          <input type="button" value="Limpiar ⊘" id="clear" />
           <input
             type="button"
-            value="&#x2B55;"
+            value="elipse 〇"
             id="circle"
             onclick="circle()"
           />
           <input
             type="button"
-            value="&#x1F532;"
+            value="rectandulo ▭"
             id="square"
             onclick="square()"
           />
-          <input type="button" value="🚫" id="eraser" onclick="erase()" />
+          <input
+            type="button"
+            value="Borrador ⌫"
+            id="eraser"
+            onclick="erase()"
+          />
         </div>
 
         <div id="chat">
           <h3>Mensajes</h3>
           <div id="messagesArea"></div>
           <div>
-            <input type="text" name="message" id="message" />
-            <button onclick="sendMessage()">Enviar</button>
+            <form action="#" id="messageForm">
+              <input type="text" name="message" id="message" required />
+              <button type="submit" id="sendMessageBtn">Enviar</button>
+            </form>
           </div>
         </div>
         <div id="usersList">
-          <h3>Usuarios</h3>
+          <div>
+            <h3>Usuarios</h3>
+          </div>
+
+          <br />
           <ol id="usersArea"></ol>
         </div>
       </div>

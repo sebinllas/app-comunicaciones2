@@ -31,7 +31,8 @@ canvas.setAttribute("height", 400);
 var ctx = canvas.getContext("2d");
 
 //----------------------Sockets Handling----------------------
-const socket = io();
+
+const socket = io("/");
 
 socket.on("firstConnection", (data) => {
   console.log(data);
@@ -41,22 +42,21 @@ socket.on("firstConnection", (data) => {
 socket.on("msg", (message) => {
   var msgView = document.createElement("div");
   msgView.innerHTML = "<b>" + message.user + "</b>: " + message.text;
-  msgView.style.fontSize = 10;
-
   messagesArea.appendChild(msgView);
+  messagesArea.scrollTo(0, messagesArea.scrollHeight);
 });
 
 socket.on("gameCreated", (game) => {
   gameId = game.gameId;
   //displayGameId.innerHTML.replace("game id: "+gameId+"");
-  displayGameId.textContent = "game id: " + gameId;
+  displayGameId.textContent = "ID del juego: " + gameId;
   gameSelect.style.display = "none";
   gameScreen.style.display = "block";
 });
 
 socket.on("joined", (game) => {
   console.log("joined");
-  displayGameId.textContent = "game id: " + game.gameId;
+  displayGameId.textContent = "ID del juego: " + game.gameId;
   gameSelect.style.display = "none";
   gameScreen.style.display = "block";
   console.log("running = ", game["running"]);
@@ -81,7 +81,6 @@ socket.on("usersChange", (usersChange) => {
       Object.values(usersChange.users)[key].username +
       ": </b>" +
       Object.values(usersChange.users)[key].score;
-    userView.style.fontSize = 10;
     usersArea.appendChild(userView);
     usersArea.appendChild(UserChangeAlert);
     if (usersChange.userDisconnected) {
@@ -104,14 +103,14 @@ socket.on("gameStarted", () => {
 });
 
 socket.on("wordToDraw", (word) => {
-  wordView.innerHTML = word;
+  wordView.innerHTML = "Debes bibujar: " + word;
   canvas.width = canvas.width;
   var seconds = 10;
   var interval = setInterval(() => {
     timerview.innerHTML = "podrás dibujar en: " + seconds + " segundos.";
     seconds--;
     if (seconds < 0) {
-      timerview.innerHTML = "";
+      timerview.innerHTML = "TIMEPO";
       clearInterval(interval);
     }
   }, 1000);
@@ -124,7 +123,7 @@ socket.on("allowToDraw", () => {
 
 socket.on("timeStart", () => {
   if (!yourTurn) {
-    wordView.innerHTML = "";
+    wordView.innerHTML = "PALABRA";
   }
   canvas.width = canvas.width;
   var seconds = 60;
@@ -133,7 +132,7 @@ socket.on("timeStart", () => {
     seconds--;
     if (seconds < 0) {
       clearInterval(interval);
-      timerview.innerHTML = "";
+      timerview.innerHTML = "TIMEPO";
     }
   }, 1000);
 });
@@ -143,6 +142,8 @@ socket.on("hit", (word) => {
   hitWord = word;
   var hitAlert = document.getElementById("hitAlert");
   hitAlert.style.display = "flex";
+  hitAlert.innerHTML =
+    "<h2>¡feliciationes!<br/>Has acertado la palabra :)</h2>";
   setTimeout(() => {
     hitAlert.style.display = "none";
   }, 3000);
@@ -203,10 +204,20 @@ socket.on("clearSocket", () => {
 socket.on("drawingTimeOut", () => {
   yourTurn = false;
   canvas.width = canvas.width;
-  wordView.innerHTML = "";
+  wordView.innerHTML = "PALABRA";
 });
 
 //----------------------Select Game functions----------------------
+
+document.getElementById("newGameForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  newGame();
+});
+
+document.getElementById("joinGameForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  joinGame();
+});
 
 function newGame() {
   var userNameHost = document.getElementById("userNameHost").value;
@@ -227,6 +238,11 @@ function joinGame() {
 }
 
 //----------------------Game functionalities----------------------
+
+document.getElementById("messageForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  sendMessage();
+});
 
 function sendMessage() {
   var message = document.getElementById("message").value;
@@ -262,7 +278,7 @@ function square() {
     squareButton.style.background = "white";
   } else {
     drawingSquare = true;
-    squareButton.style.background = "blue";
+    squareButton.style.background = "#282846";
     drawingCircle = false;
     circleButton.style.background = "white";
     erasing = false;
@@ -278,7 +294,7 @@ function circle() {
     drawingSquare = false;
     squareButton.style.background = "white";
     drawingCircle = true;
-    circleButton.style.background = "blue";
+    circleButton.style.background = "#282846";
     erasing = false;
     eraseButton.style.background = "white";
   }
@@ -294,7 +310,7 @@ function erase() {
     drawingCircle = false;
     circleButton.style.background = "white";
     erasing = true;
-    eraseButton.style.background = "blue";
+    eraseButton.style.background = "#282846";
   }
 }
 

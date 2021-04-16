@@ -47,7 +47,12 @@ io.on("connection", (client) => {
   });
 
   client.on("message", (message) => {
-    var word = games[clientRooms[client.id]]["word"];
+    if(games[clientRooms[client.id]]){
+      var word = games[clientRooms[client.id]]["word"];
+    }else{
+      word = " ";
+    }
+    
     if (
       message
         .normalize("NFD")
@@ -162,7 +167,7 @@ io.on("connection", (client) => {
     }
 
     if (
-      games[clientRooms[client.id]].users &&
+      games[clientRooms[client.id]] &&
       Object.keys(games[clientRooms[client.id]].users).length == 0
     ) {
       console.log("deleting game", games[clientRooms[client.id]]);
