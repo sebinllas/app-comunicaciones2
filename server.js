@@ -8,6 +8,9 @@ var games = {};
 const express = require("express");
 const app = express();
 const path = require("path");
+const http = require('http');
+const server = http.createServer(app);
+
 app.use(express.static(path.join(__dirname + "/public/style.css")));
 app.use(express.static(path.join(__dirname + "/public/app.js")));
 
@@ -27,7 +30,9 @@ app.listen(app.get("port"), () => {
 });
 
 //----------------------Sockets Handling----------------------
-const io = require("socket.io")(3000, {
+
+//const io = require('socket.io')(server);
+const io = require("socket.io")(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
