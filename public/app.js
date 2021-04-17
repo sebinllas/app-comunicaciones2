@@ -149,6 +149,17 @@ socket.on("hit", (word) => {
   }, 3000);
 });
 
+socket.on("point", (user) => {
+  var msgView = document.createElement("div");
+  msgView.innerHTML = "<b>" + user + "</b>: " + "ha acertado la palabra";
+  messagesArea.appendChild(msgView);
+  messagesArea.scrollTo(0, messagesArea.scrollHeight);
+  var audio = new Audio(
+    "https://www.beepbox.co/#8n31s0k0l00e03t2mm0a7g0fj07i0r4o3210T3v1L4uf4q1d5f8y2z7C0S009ajurqOiO9900T0v1L4u22q1d5f6y1z8C0w4c0h1T1v1L4ue7q3d5f8y2z1C1c0A0F5B3V1Q0040Pea77E0b78T2v1L4u15q0d1f8y0z1C2w0b4h400000000h4g000000014h000000004h400000000p1c0aqfKMYL0000"
+  );
+  audio.play();
+});
+
 socket.on("endGame", (msg) => {
   var hitAlertText = document.getElementById("hitAlert").innerHTML;
   document.getElementById("hitAlert").innerHTML = msg;

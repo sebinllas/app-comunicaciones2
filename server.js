@@ -69,6 +69,10 @@ io.on("connection", (client) => {
       });
     } else if (client.id != games[clientRooms[client.id]].drawer) {
       client.emit("hit", word);
+      io.to(clientRooms[client.id]).emit(
+        "point",
+        games[clientRooms[client.id]][users][client.id].username
+      );
       games[clientRooms[client.id]].users[client.id]["score"] += 1;
       if (games[clientRooms[client.id]].users[client.id]["score"] >= 5) {
         games[clientRooms[client.id]]["winner"] = client.id;
