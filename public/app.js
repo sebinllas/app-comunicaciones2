@@ -110,7 +110,7 @@ socket.on("wordToDraw", (word) => {
     timerview.innerHTML = "podrás dibujar en: " + seconds + " segundos.";
     seconds--;
     if (seconds < 0) {
-      timerview.innerHTML = "TIMEPO";
+      timerview.innerHTML = "TIEMPO";
       clearInterval(interval);
     }
   }, 1000);
