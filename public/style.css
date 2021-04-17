@@ -120,6 +120,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
   padding: 20px;
   width: 300px;
   height: 150px;
@@ -134,6 +135,7 @@ body {
   margin-top: 10%;
   left: -150px;
 }
+
 #drawArea input {
   margin-right: 5px;
   border-radius: 10px;

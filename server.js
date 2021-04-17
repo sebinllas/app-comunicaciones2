@@ -2,6 +2,7 @@ const { makeid, randomWord } = require("./utils");
 var firstUserConnected = false;
 var clientRooms = {};
 var games = {};
+var mainTimer;
 
 //----------------------web Server----------------------
 /*
@@ -34,7 +35,7 @@ app.listen(app.get("port"), () => {
 //const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
 const io = require("socket.io")(process.env.PORT || 3000, {
   cors: {
-    origin: "*"
+    origin: "*",
   },
 });
 
@@ -70,16 +71,17 @@ io.on("connection", (client) => {
       client.emit("hit", word);
       io.to(clientRooms[client.id]).emit(
         "point",
-        games[clientRooms[client.id]][users][client.id].username
+        games[clientRooms[client.id]].users[client.id].username
       );
       games[clientRooms[client.id]].users[client.id]["score"] += 1;
       if (games[clientRooms[client.id]].users[client.id]["score"] >= 5) {
         games[clientRooms[client.id]]["winner"] = client.id;
+
         io.to(clientRooms[client.id]).emit(
           "endGame",
-          games[clientRooms[client.id]][users][client.id].username +
-            " ha ganado"
+          games[clientRooms[client.id]].users[client.id].username + " ha ganado"
         );
+        clearTimeout(mainTimer);
       }
       io.to(clientRooms[client.id]).emit("usersChange", {
         users: games[clientRooms[client.id]].users,
@@ -193,10 +195,11 @@ io.on("connection", (client) => {
     }
     var users = Array.from(io.sockets.adapter.rooms.get(room));
     var UsersNumber = users.length;
-    if (UsersNumber == 1 || games[room].winner) {
+    if (UsersNumber == 1) {
+    } else if (games[room].winner) {
       io.to(clientRooms[client.id]).emit(
         "endGame",
-        "No hay suficientes jugadores"
+        games[room].users[games[room].winner] + " Ha ganado"
       );
       return;
     }
@@ -213,7 +216,7 @@ io.on("connection", (client) => {
       setTimeout(() => {
         io.to(users[i]).emit("allowToDraw");
         io.to(room).emit("timeStart");
-        setTimeout(() => {
+        mainTimer = setTimeout(() => {
           io.to(users[i]).emit("drawingTimeOut");
           runGame(room, i + 1);
         }, 60000);

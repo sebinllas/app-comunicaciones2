@@ -24,6 +24,11 @@ var color = "black";
 var strokewidth = 2;
 var hit = false;
 var hitWord;
+var alertAudio = new Audio("/public/beep.mp3");
+var msgAudio = new Audio("/public/msg-beep.mp3");
+msgAudio.volume = 0.2;
+alertAudio.volume = 0.5;
+var mainInterval;
 
 var canvas = document.getElementById("canvas");
 canvas.setAttribute("width", 550);
@@ -32,7 +37,9 @@ var ctx = canvas.getContext("2d");
 
 //----------------------Socket Handling----------------------
 
-const socket = io("https://app-comunicaciones2.herokuapp.com/");
+const socket = io(
+  /*"https://app-comunicaciones2.herokuapp.com/"*/ "http://localhost:3000"
+);
 
 socket.on("firstConnection", (data) => {
   console.log(data);
@@ -44,6 +51,7 @@ socket.on("msg", (message) => {
   msgView.innerHTML = "<b>" + message.user + "</b>: " + message.text;
   messagesArea.appendChild(msgView);
   messagesArea.scrollTo(0, messagesArea.scrollHeight);
+  msgAudio.play();
 });
 
 socket.on("gameCreated", (game) => {
@@ -91,7 +99,9 @@ socket.on("usersChange", (usersChange) => {
         "El Usuario " + usersChange.userConnected + " se ha conectado";
     } else {
     }
+    msgAudio.play();
     setTimeout(() => {
+      
       UserChangeAlert.innerHTML = "";
     }, 4000);
   }
@@ -106,14 +116,25 @@ socket.on("wordToDraw", (word) => {
   wordView.innerHTML = "Debes bibujar: " + word;
   canvas.width = canvas.width;
   var seconds = 10;
+  var hitAlert = document.getElementById("hitAlert");
   var interval = setInterval(() => {
+    hitAlert.innerHTML =
+      "<h2>¡Preparate!<br/>debes dibujar la palabra: " +
+      word +
+      "</h2>Empezando en: " +
+      seconds +
+      " segundos";
+      hitAlert.style.display = "flex";
     timerview.innerHTML = "podrás dibujar en: " + seconds + " segundos.";
     seconds--;
     if (seconds < 0) {
       timerview.innerHTML = "TIEMPO";
       clearInterval(interval);
+      hitAlert.style.display = "none";
     }
   }, 1000);
+
+  alertAudio.play();
 });
 
 socket.on("allowToDraw", () => {
@@ -127,12 +148,12 @@ socket.on("timeStart", () => {
   }
   canvas.width = canvas.width;
   var seconds = 60;
-  var interval = setInterval(() => {
+  mainInterval = setInterval(() => {
     timerview.innerHTML = "tiempo restante: " + seconds + " segundos.";
     seconds--;
     if (seconds < 0) {
-      clearInterval(interval);
-      timerview.innerHTML = "TIMEPO";
+      clearInterval(mainInterval);
+      timerview.innerHTML = "TIEMPO";
     }
   }, 1000);
 });
@@ -151,16 +172,10 @@ socket.on("hit", (word) => {
 
 socket.on("point", (user) => {
   var msgView = document.createElement("div");
-  msgView.innerHTML = "<b>" + user + "</b>: " + "ha acertado la palabra";
+  msgView.innerHTML = "<b>" + user + " ha acertado la palabra</b>";
   messagesArea.appendChild(msgView);
   messagesArea.scrollTo(0, messagesArea.scrollHeight);
-  var audio = new Audio(
-    "https://www.beepbox.co/#8n31s0k0l00e03t2mm0a7g0fj07i0r4o3210T3"+
-    "v1L4uf4q1d5f8y2z7C0S009ajurqOiO9900T0v1L4u22q1d5f6y1z8C0w4c0h1T"+
-    "1v1L4ue7q3d5f8y2z1C1c0A0F5B3V1Q0040Pea77E0b78T2v1L4u15q0d1f8y0z1"+
-    "C2w0b4h400000000h4g000000014h000000004h400000000p1c0aqfKMYL0000"
-  );
-  audio.play();
+  alertAudio.play();
 });
 
 socket.on("endGame", (msg) => {
@@ -169,8 +184,9 @@ socket.on("endGame", (msg) => {
   document.getElementById("hitAlert").style.display = "flex";
   setTimeout(() => {
     document.getElementById("hitAlert").style.display = "none";
-  }, 3000);
-  document.getElementById("hitAlert") = hitAlertText;
+  }, 5000);
+  //document.getElementById("hitAlert").innerHTML = hitAlertText;
+  clearInterval(mainInterval);
   startGameBtn.style.display = "block";
 });
 
