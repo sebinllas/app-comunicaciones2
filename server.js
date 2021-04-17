@@ -61,7 +61,7 @@ io.on("connection", (client) => {
     if (
       message
         .normalize("NFD")
-        .replace(/[\u00C0-\u00FF]/g, "")
+        .replace(/[\u0300-\u036f]/g, "")
         .toUpperCase() != word
     ) {
       io.to(clientRooms[client.id]).emit("msg", {
