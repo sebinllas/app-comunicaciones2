@@ -38,7 +38,7 @@ var ctx = canvas.getContext("2d");
 //----------------------Socket Handling----------------------
 
 const socket = io(
-  "https://app-comunicaciones2.herokuapp.com/" /*"http://localhost:3000*/"
+  "https://app-comunicaciones2.herokuapp.com/ " /*http://localhost:3000*/
 );
 
 socket.on("firstConnection", (data) => {
