@@ -34,7 +34,7 @@ app.listen(app.get("port"), () => {
 //const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
 const io = require("socket.io")(process.env.PORT || 3000, {
   cors: {
-    origin: "*",
+    origin: "https://paintgame.netlify.app/",
     withCredentials: false,
   },
 });
