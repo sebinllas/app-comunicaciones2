@@ -201,6 +201,11 @@ io.on("connection", (client) => {
     var users = Array.from(io.sockets.adapter.rooms.get(room));
     var UsersNumber = users.length;
     if (UsersNumber == 1) {
+      io.to(clientRooms[client.id]).emit(
+        "endGame",
+        "No hay suficientes Jugadores"
+      );
+      return;
     } else if (games[room].winner) {
       io.to(clientRooms[client.id]).emit(
         "endGame",
