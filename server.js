@@ -76,7 +76,7 @@ io.on("connection", (client) => {
         games[clientRooms[client.id]].users[client.id].username
       );
       games[clientRooms[client.id]].users[client.id]["score"] += 1;
-      if (games[clientRooms[client.id]].users[client.id]["score"] >=1) {
+      if (games[clientRooms[client.id]].users[client.id]["score"] >=5) {
         games[clientRooms[client.id]]["winner"] = client.id;
         for (let usr of Object.keys(games[clientRooms[client.id]].users)) {
           games[clientRooms[client.id]].users[usr].score = 0;
