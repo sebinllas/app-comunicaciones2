@@ -32,14 +32,14 @@ app.listen(app.get("port"), () => {
 */
 //----------------------Sockets Handling----------------------
 
- const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
-// const io = require("socket.io")(process.env.PORT || 5555, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//     withCredentials: false,
-//   },
-// });
+// const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
+const io = require("socket.io")(process.env.PORT || 5555, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    withCredentials: false,
+  },
+});
 
 io.on("connection", (client) => {
   console.log("usuario: " + client.id + " se ha conectado");
