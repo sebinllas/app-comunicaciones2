@@ -32,14 +32,14 @@ app.listen(app.get("port"), () => {
 */
 //----------------------Sockets Handling----------------------
 
-//const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
-const io = require("socket.io")(process.env.PORT || 3000, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    withCredentials: false,
-  },
-});
+ const io = require('socket.io')("https://app-comunicaciones2.herokuapp.com");
+// const io = require("socket.io")(process.env.PORT || 5555, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     withCredentials: false,
+//   },
+// });
 
 io.on("connection", (client) => {
   console.log("usuario: " + client.id + " se ha conectado");
@@ -76,9 +76,9 @@ io.on("connection", (client) => {
         games[clientRooms[client.id]].users[client.id].username
       );
       games[clientRooms[client.id]].users[client.id]["score"] += 1;
-      if (games[clientRooms[client.id]].users[client.id]["score"] >= 5) {
+      if (games[clientRooms[client.id]].users[client.id]["score"] >=1) {
         games[clientRooms[client.id]]["winner"] = client.id;
-        for (let usr in Object.keys(games[clientRooms[client.id]].users)) {
+        for (let usr of Object.keys(games[clientRooms[client.id]].users)) {
           games[clientRooms[client.id]].users[usr].score = 0;
         }
 

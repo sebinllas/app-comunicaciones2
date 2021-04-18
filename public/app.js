@@ -21,7 +21,7 @@ var drawingSquare = false;
 var drawingCircle = false;
 var erasing = false;
 var color = "black";
-var strokewidth = 2;
+var strokewidth = 4;
 var hit = false;
 var hitWord;
 var alertAudio = new Audio("beep.mp3");
@@ -38,6 +38,7 @@ var ctx = canvas.getContext("2d");
 //----------------------Socket Handling----------------------
 
 const socket = io("https://app-comunicaciones2.herokuapp.com/");
+//const socket = io(":5555");
 
 socket.on("firstConnection", (data) => {
   console.log(data);
@@ -99,7 +100,6 @@ socket.on("usersChange", (usersChange) => {
     }
     msgAudio.play();
     setTimeout(() => {
-      
       UserChangeAlert.innerHTML = "";
     }, 4000);
   }
@@ -122,7 +122,7 @@ socket.on("wordToDraw", (word) => {
       "</h2>Empezando en: " +
       seconds +
       " segundos";
-      hitAlert.style.display = "flex";
+    hitAlert.style.display = "flex";
     timerview.innerHTML = "podrás dibujar en: " + seconds + " segundos.";
     seconds--;
     if (seconds < 0) {

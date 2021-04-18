@@ -1,20 +1,24 @@
 {
   "name": "appcomunicaciones2",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "juego usando socket.io",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebinllas/app-comunicaciones2.git"
+  },
+  "author": "sebinllas",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebinllas/app-comunicaciones2/issues"
+  },
+  "homepage": "https://github.com/sebinllas/app-comunicaciones2#readme",
   "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "socket.io": "^4.0.0",
+    "socket.io": "^4.0.1",
     "socketio": "^1.0.0"
   }
 }
