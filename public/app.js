@@ -162,7 +162,7 @@ socket.on("hit", (word) => {
   var hitAlert = document.getElementById("hitAlert");
   hitAlert.style.display = "flex";
   hitAlert.innerHTML =
-    "<h2>¡feliciationes!<br/>Has acertado la palabra :)</h2>";
+    "<h2>¡felicitaciones!<br/>Has acertado la palabra :)</h2>";
   setTimeout(() => {
     hitAlert.style.display = "none";
   }, 3000);
