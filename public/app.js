@@ -24,8 +24,8 @@ var color = "black";
 var strokewidth = 4;
 var hit = false;
 var hitWord;
-var alertAudio = new Audio("beep.mp3");
-var msgAudio = new Audio("msg-beep.mp3");
+var alertAudio = new Audio("./assets/beep.mp3");
+var msgAudio = new Audio("./assets/msg-beep.mp3");
 msgAudio.volume = 0.2;
 alertAudio.volume = 0.5;
 var mainInterval;
@@ -38,7 +38,6 @@ var ctx = canvas.getContext("2d");
 //----------------------Socket Handling----------------------
 
 const socket = io("https://app-comunicaciones2.herokuapp.com/");
-//const socket = io(":5555");
 
 socket.on("firstConnection", (data) => {
   console.log(data);
@@ -162,7 +161,7 @@ socket.on("hit", (word) => {
   var hitAlert = document.getElementById("hitAlert");
   hitAlert.style.display = "flex";
   hitAlert.innerHTML =
-    "<h2>¡felicitaciones!<br/>Has acertado la palabra :)</h2>";
+    "<h2>¡felicitiones!<br/>Has acertado la palabra :)</h2>";
   setTimeout(() => {
     hitAlert.style.display = "none";
   }, 3000);
